@@ -1,0 +1,11 @@
+.input {
+    width: 30px;
+}
+.row {
+    margin-top: 10px;
+}
+.object {
+    cursor: pointer;
+    border: 1px solid grey;
+    padding: 5px;
+}
