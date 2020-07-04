@@ -1,7 +1,5 @@
-
-function addM(value) {
-    console.log(value);
-}
+const input = document.getElementById('m_input')
+console.log(input.event.value);
 
 function getRandom() {
     return Math.floor(Math.random() * 900) + 100; 
