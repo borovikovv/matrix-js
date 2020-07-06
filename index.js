@@ -1,12 +1,28 @@
-const input = document.getElementById('m_input')
-console.log(input.event.value);
+function input() {
+    const inputM = document.querySelectorAll('.input')[0].value;
+    const inputN = document.querySelectorAll('.input')[1].value;
+
+    const matrix = createMatrix(inputM, inputN);
+
+    if(inputM && inputN) {
+        displayMatrix(matrix)
+    }
+}
 
 function getRandom() {
     return Math.floor(Math.random() * 900) + 100; 
 }
 
-function incrementAmount(num) {
-    return num++;
+function incrementAmount(id, matrix) {
+    matrix.forEach((arr, idx) => {
+        arr.forEach((item, index) => {
+            if(item.id === id) {
+                matrix[idx][index]['amount']++
+            }
+        })
+    })
+
+    displayMatrix(matrix);
 }
 
 function createMatrix(m, n) {
@@ -23,8 +39,6 @@ function createMatrix(m, n) {
 
     return array;
 }
-
-const matrix = createMatrix(10, 10);
 
 function findSumRow() {
     let sumRow = [];
@@ -54,7 +68,7 @@ function findColArithmeticMean() {
     return colArithmeticMean;
 }
 
-function displayMatrix() {
+function displayMatrix(matrix) {
     const elem = document.getElementById('matrix');
 
     for(let i = 0; i < matrix.length; i++) {
@@ -66,12 +80,8 @@ function displayMatrix() {
             let span = document.createElement('span');
             span.classList.add('object');
             span.innerHTML = matrix[i][j]['amount'];
-            span.onclick = () => incrementAmount(matrix[i][j]['amount']);
+            span.onclick = () => incrementAmount(matrix[i][j]['id'], matrix);
             div.appendChild(span)
         }
     }
-}    
-
-displayMatrix();
-console.log(findColArithmeticMean())
-console.log(findSumRow());
+}
