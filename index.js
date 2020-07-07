@@ -14,15 +14,18 @@ function getRandom() {
 }
 
 function incrementAmount(id, matrix) {
+    const elem = document.getElementById(id);
+    let incrementNum = 0;
+
     matrix.forEach((arr, idx) => {
         arr.forEach((item, index) => {
             if(item.id === id) {
-                matrix[idx][index]['amount']++
+                incrementNum = matrix[idx][index]['amount']++
             }
         })
     })
 
-    displayMatrix(matrix);
+    elem.innerHTML = incrementNum;
 }
 
 function createMatrix(m, n) {
@@ -79,6 +82,7 @@ function displayMatrix(matrix) {
         for(let j = 0; j < matrix[i].length; j++) {
             let span = document.createElement('span');
             span.classList.add('object');
+            span.id = matrix[i][j]['id']
             span.innerHTML = matrix[i][j]['amount'];
             span.onclick = () => incrementAmount(matrix[i][j]['id'], matrix);
             div.appendChild(span)
