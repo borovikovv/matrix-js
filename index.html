@@ -7,10 +7,14 @@
     <title>MATRIX</title>
 </head>
 <body>
-    <input onchange="input()" type="number" class="input">
-    <input onchange="input()" type="number" class="input">
-    <input type="number" class="input">
-    <div id='matrix'></div>
+    <div class='input-container'>
+        <input onchange="input()" type="number" class="input">
+        <input onchange="input()" type="number" class="input">
+        <input type="number" class="input">
+    </div>
+    <div id='matrix' class="matrix"></div>
+    <div class="sum-container" id='sum-row'></div>
+    <div class="col-container" id='col-arr'></div>
     <script src='index.js'></script>
 </body>
 </html>

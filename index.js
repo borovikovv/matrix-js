@@ -15,12 +15,12 @@ function getRandom() {
 
 function incrementAmount(id, matrix) {
     const elem = document.getElementById(id);
-    let incrementNum = 0;
+    let incrementNum;
 
     matrix.forEach((arr, idx) => {
         arr.forEach((item, index) => {
             if(item.id === id) {
-                incrementNum = matrix[idx][index]['amount']++
+                incrementNum = ++matrix[idx][index]['amount']
             }
         })
     })
@@ -43,29 +43,43 @@ function createMatrix(m, n) {
     return array;
 }
 
-function findSumRow() {
+function findSumRow(matrix) {
+    const elem = document.getElementById('sum-row');
     let sumRow = [];
     let sum;
 
     for(let i = 0; i < matrix.length; i++) {
+        const div = document.createElement('div');
+        elem.appendChild(div)
+
         sum = matrix[i].reduce((acc, item) => acc + item['amount'], 0)
         sumRow.push({sum: sum});
+
+        div.innerHTML = sum;
+        div.classList.add('sum-row');
     }
 
     return sumRow;
 }
 
-function findColArithmeticMean() {
+function findColArithmeticMean(matrix) {
     let colArithmeticMean = [];
+    const elem = document.getElementById('col-arr');
 
     for(let i = 0; i < matrix.length; i++) {
         let sum = 0;
         let arithmeticMean = 0;
+        const span = document.createElement('span');
+        elem.appendChild(span)
+
         for(let j = 0; j < matrix[i].length; j++) {
             sum += matrix[j][i]['amount'];
         }
         arithmeticMean =  Math.floor(sum / matrix[i].length);
         colArithmeticMean.push({col: arithmeticMean})
+
+        span.innerHTML = arithmeticMean;
+        span.classList.add('col-arr-mean');
     }
 
     return colArithmeticMean;
@@ -88,4 +102,7 @@ function displayMatrix(matrix) {
             div.appendChild(span)
         }
     }
+    
+    findColArithmeticMean(matrix);
+    findSumRow(matrix);
 }
