@@ -111,7 +111,15 @@ function changeSumRow(arr, idx) {
 function changeColArithmeticsMean(matrix, arr, rowIdx, colIdx) {
     const elemList = document.querySelectorAll('.col-arr-mean');
     let elem;
-    console.log(elemList[colIdx])
+    let colArithmeticMean;
+    let sum = 0;
+    
+    for(let i = 0; i < matrix.length; i++) {
+        sum += matrix[i][colIdx]['amount'];
+    }
+
+    colArithmeticMean = sum / matrix.length;
+    elemList[colIdx].innerHTML = Math.floor(colArithmeticMean)
 }
 
 function displayMatrix(matrix) {
