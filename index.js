@@ -110,7 +110,6 @@ function changeSumRow(arr, idx) {
 
 function changeColArithmeticsMean(matrix, arr, rowIdx, colIdx) {
     const elemList = document.querySelectorAll('.col-arr-mean');
-    let elem;
     let colArithmeticMean;
     let sum = 0;
     
