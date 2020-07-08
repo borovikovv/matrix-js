@@ -13,19 +13,27 @@ function getRandom() {
     return Math.floor(Math.random() * 900) + 100; 
 }
 
-function incrementAmount(id, matrix) {
+function incrementAmount(id, matrix, colArithmeticsMean, rowSum) {
     const elem = document.getElementById(id);
     let incrementNum;
+    let rowIdx = 0;
+    let colIdx = 0;
 
     matrix.forEach((arr, idx) => {
+    
         arr.forEach((item, index) => {
             if(item.id === id) {
+                rowIdx = idx;
+                colIdx = index;
                 incrementNum = ++matrix[idx][index]['amount']
             }
         })
     })
 
     elem.innerHTML = incrementNum;
+
+    changeSumRow(rowSum, rowIdx);
+    changeColArithmeticsMean(matrix, colArithmeticsMean, rowIdx, colIdx)
 }
 
 function createMatrix(m, n) {
@@ -82,7 +90,28 @@ function findColArithmeticMean(matrix) {
         span.classList.add('col-arr-mean');
     }
 
+
     return colArithmeticMean;
+}
+
+function changeSumRow(arr, idx) {
+    const elemList = document.querySelectorAll('.sum-row');
+    let elem;
+
+    for(let i = 0; i < elemList.length; i++) {
+        let item = elemList[i];
+        if(Number(item.innerHTML) === arr[idx]['sum']) {
+            elem = item;
+        }
+    }
+    
+    elem.innerHTML = ++arr[idx]['sum'];
+}
+
+function changeColArithmeticsMean(matrix, arr, rowIdx, colIdx) {
+    const elemList = document.querySelectorAll('.col-arr-mean');
+    let elem;
+    console.log(elemList[colIdx])
 }
 
 function displayMatrix(matrix) {
@@ -98,11 +127,11 @@ function displayMatrix(matrix) {
             span.classList.add('object');
             span.id = matrix[i][j]['id']
             span.innerHTML = matrix[i][j]['amount'];
-            span.onclick = () => incrementAmount(matrix[i][j]['id'], matrix);
+            span.onclick = () => incrementAmount(matrix[i][j]['id'], matrix, colArithmeticsMean, rowSum);
             div.appendChild(span)
         }
     }
     
-    findColArithmeticMean(matrix);
-    findSumRow(matrix);
+    const colArithmeticsMean = findColArithmeticMean(matrix);
+    const rowSum = findSumRow(matrix);
 }
